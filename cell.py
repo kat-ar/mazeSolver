@@ -30,3 +30,47 @@ class Cell:
         if self.has_left_wall:
             line = Line(Point(x1, y2), Point(x1, y1))
             self._win.draw_line(line)
+
+    def draw_move(self, to_cell, undo=False):
+        if self._win is None:
+            return
+        # coordinates of the centers of cells we want to connect
+        x_middle = (self._x1 + self._x2)/2
+        y_middle = (self._y1 + self._y2)/2
+
+        to_x_middle = (to_cell._x1 + to_cell._x2)/2
+        to_y_middle = (to_cell._y1 + to_cell._y2)/2
+        # fill color - draw or backtrack
+        fill_color = "red"
+        if undo:
+            fill_color = "gray"
+        # moving horizontal - y constans
+        # moving left:
+        if self._x1 > to_cell._x1:
+            line = Line(Point(x_middle, y_middle), Point(to_cell._x2, y_middle))
+            self._win.draw_line(line, fill_color)
+            line = Line(Point(to_cell._x2, y_middle), Point(to_x_middle, y_middle))
+            self._win.draw_line(line, fill_color)
+            # line = Line(Point(x_middle, y_middle), Point(to_x_middle, y_middle))
+            # self._win.draw_line(line, fill_color)
+        # moving right
+        elif self._x1 < to_cell._x1:
+            line = Line(Point(x_middle, y_middle), Point(to_cell._x1, y_middle))
+            self._win.draw_line(line, fill_color)
+            line = Line(Point(to_cell._x1, y_middle), Point(to_x_middle, y_middle))
+            self._win.draw_line(line, fill_color)
+        # moving vertical - x constans
+        # moving up
+        elif self._y1 > to_cell._y1:
+            line = Line(Point(x_middle, y_middle), Point(x_middle, self._y1))
+            self._win.draw_line(line, fill_color)
+            line = Line(Point(to_x_middle, to_cell._y2), Point(to_x_middle, to_y_middle))
+            self._win.draw_line(line, fill_color)
+        # moving down
+        elif self._y1 < to_cell._y1:
+            line = Line(Point(x_middle, y_middle), Point(x_middle, self._y2))
+            self._win.draw_line(line, fill_color)
+            line = Line(Point(to_x_middle, to_y_middle), Point(to_x_middle, to_cell._y1))
+            self._win.draw_line(line, fill_color)
+
+
