@@ -1,5 +1,6 @@
 from graphics import Window
 from cell import Cell
+from maze import Maze
 
 
 def run():
@@ -15,11 +16,11 @@ def run():
 
     third_cell = Cell(win)
     third_cell.has_top_wall = False
-    third_cell.draw(20,60,40,80)
+    third_cell.draw(20, 60, 40, 80)
 
     fourth_cell = Cell(win)
     fourth_cell.has_bottom_wall = False
-    fourth_cell.draw(40,20,60,40)
+    fourth_cell.draw(40, 20, 60, 40)
 
     # fifth_cell = Cell(win)
     # fifth_cell.has_left_wall = False
@@ -33,5 +34,19 @@ def run():
     win.wait_for_close()
 
 
+def run2():
+    num_rows = 12
+    num_cols = 16
+    margin = 50
+    screen_x = 800
+    screen_y = 600
+    cell_size = (screen_x - 2 * margin) / num_cols
+    win = Window(screen_x, screen_y)
+
+    maze = Maze(margin, margin, num_rows, num_cols, cell_size, win)
+
+    win.wait_for_close()
+
+
 if __name__ == '__main__':
-    run()
+    run2()
