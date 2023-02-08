@@ -3,7 +3,7 @@ import time
 
 
 class Maze:
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size, win):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size, win=None):
         self._cells = []
         self._x1 = x1
         self._y1 = y1
@@ -13,6 +13,7 @@ class Maze:
         self._win = win
 
         self._create_cells()
+        self._break_entrance_and_exit()
 
     def _create_cells(self):
         for _ in range(self._num_cols):
@@ -31,9 +32,13 @@ class Maze:
         y1 = self._y1 + j * self._cell_size
         x2 = x1 + self._cell_size
         y2 = y1 + self._cell_size
-        self._cells[i][j].draw(x1, y1, x2, y2)
+        self._cells[i][j].draw_cell(x1, y1, x2, y2)
         self._animate()
-
+    def _break_entrance_and_exit(self):
+        self._cells[0][0].has_top_wall = False
+        self._draw_cells(0,0)
+        self._cells[self._num_cols-1][self._num_rows-1].has_bottom_wall = False
+        self._draw_cells(self._num_cols-1,self._num_rows-1)
     def _animate(self):
         if self._win is None:
             return

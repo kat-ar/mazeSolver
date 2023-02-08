@@ -1,5 +1,9 @@
 from tkinter import Tk, BOTH, Canvas
 
+BACKGROUND_COLOR = "white"
+PATH_COLOR = "red"
+WALL_COLOR = "black"
+BACKTRACK_COLOR = "gray"
 
 class Window:
     def __init__(self, width, height):
