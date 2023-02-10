@@ -45,7 +45,7 @@ def run2():
     seed = 0
     maze = Maze(margin, margin, num_rows, num_cols, cell_size, win, seed)
 
-
+    maze.solve()
     win.wait_for_close()
 
 
