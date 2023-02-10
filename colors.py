@@ -1,0 +1,4 @@
+BACKGROUND_COLOR = "white"
+PATH_COLOR = "red"
+WALL_COLOR = "black"
+BACKTRACK_COLOR = "gray"

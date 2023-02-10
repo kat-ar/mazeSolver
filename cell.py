@@ -1,4 +1,5 @@
 from graphics import Point, Line
+import colors
 
 
 class Cell:
@@ -23,22 +24,22 @@ class Cell:
         if self.has_top_wall:
             self._win.draw_line(line)
         else:
-            self._win.draw_line(line, fill_color="white")
+            self._win.draw_line(line, fill_color=colors.BACKGROUND_COLOR)
         line = Line(Point(x2, y1), Point(x2, y2))
         if self.has_right_wall:
             self._win.draw_line(line)
         else:
-            self._win.draw_line(line, fill_color="white")
+            self._win.draw_line(line, fill_color=colors.BACKGROUND_COLOR)
         line = Line(Point(x2, y2), Point(x1, y2))
         if self.has_bottom_wall:
             self._win.draw_line(line)
         else:
-            self._win.draw_line(line, fill_color="white")
+            self._win.draw_line(line, fill_color=colors.BACKGROUND_COLOR)
         line = Line(Point(x1, y2), Point(x1, y1))
         if self.has_left_wall:
             self._win.draw_line(line)
         else:
-            self._win.draw_line(line, fill_color="white")
+            self._win.draw_line(line, fill_color=colors.BACKGROUND_COLOR)
 
     def draw_move(self, to_cell, undo=False):
         if self._win is None:
@@ -50,9 +51,9 @@ class Cell:
         to_x_middle = (to_cell._x1 + to_cell._x2)/2
         to_y_middle = (to_cell._y1 + to_cell._y2)/2
         # fill color - draw or backtrack
-        fill_color = "red"
+        fill_color = colors.PATH_COLOR
         if undo:
-            fill_color = "gray"
+            fill_color = colors.BACKTRACK_COLOR
         # moving horizontal - y constans
         # moving left:
         if self._x1 > to_cell._x1:

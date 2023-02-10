@@ -1,15 +1,10 @@
 from tkinter import Tk, BOTH, Canvas
-
-BACKGROUND_COLOR = "white"
-PATH_COLOR = "red"
-WALL_COLOR = "black"
-BACKTRACK_COLOR = "gray"
-
+import colors
 class Window:
     def __init__(self, width, height):
         self.__root = Tk()
         self.__root.title("Maze solver")
-        self.__canvas = Canvas(self.__root, bg="white", height=height, width=width)
+        self.__canvas = Canvas(self.__root, bg=colors.BACKGROUND_COLOR, height=height, width=width)
         self.__canvas.pack(fill=BOTH, expand=1)
         self.__root.protocol("WM_DELETE_WINDOW", self.close)
 
@@ -17,7 +12,7 @@ class Window:
         self.__root.update_idletasks()
         self.__root.update()
 
-    def draw_line(self, line, fill_color="black"):
+    def draw_line(self, line, fill_color=colors.WALL_COLOR):
         line.draw(self.__canvas, fill_color)
 
     def wait_for_close(self):
@@ -41,7 +36,7 @@ class Line:
         self.first_point = first_point
         self.second_point = second_point
 
-    def draw(self, canvas, fill_color="black"):
+    def draw(self, canvas, fill_color=colors.WALL_COLOR):
         canvas.create_line(
             self.first_point.x, self.first_point.y,
             self.second_point.x, self.second_point.y,
