@@ -37,7 +37,7 @@ class Maze:
         x2 = x1 + self._cell_size
         y2 = y1 + self._cell_size
         self._cells[i][j].draw_cell(x1, y1, x2, y2)
-        self._animate()
+        self._animate(time_sleep_secs=0.005)
 
     def _break_entrance_and_exit(self):
         self._cells[0][0].has_top_wall = False
@@ -107,7 +107,7 @@ class Maze:
         return self._solve_r(0, 0)
 
     def _solve_r(self, i, j):
-        self._animate()
+        self._animate(time_sleep_secs=0.09)
         self._cells[i][j].visited = True
         # if we have reached the goal cell (right-bottom most)
         if i == self._num_cols - 1 and j == self._num_rows - 1:
@@ -149,8 +149,8 @@ class Maze:
                 self._cells[i][j].draw_move(self._cells[i][j + 1], undo=True)
         return False
 
-    def _animate(self):
+    def _animate(self, time_sleep_secs=0.05):
         if self._win is None:
             return
         self._win.redraw()
-        time.sleep(0.05)
+        time.sleep(time_sleep_secs)
